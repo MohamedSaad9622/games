@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Games Rating-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="games" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,36 +16,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KNJ-TG-5da">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KNJ-TG-5da">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="separatorColor" red="0.97680455450000003" green="0.95481186894940684" blue="0.20277862550195172" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellidentifier" focusStyle="custom" textLabel="6Hk-uM-D5a" detailTextLabel="1rb-Rk-VTE" imageView="kuB-2t-iM9" style="IBUITableViewCellStyleSubtitle" id="IhR-MZ-ZKF">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellidentifier" rowHeight="121" id="Cn6-1A-QZ4" customClass="GameTableViewCell" customModule="games" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="121"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IhR-MZ-ZKF" id="vjZ-Cz-Hji">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cn6-1A-QZ4" id="3cN-On-9CJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="121"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Hk-uM-D5a">
-                                                    <rect key="frame" x="79" y="6" width="25" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1rb-Rk-VTE">
-                                                    <rect key="frame" x="79" y="22.5" width="40.5" height="13.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="image" id="kuB-2t-iM9">
-                                                    <rect key="frame" x="20" y="0.0" width="44" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7tz-B9-pFw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="404" height="121"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="Yxv-jH-652">
+                                                            <rect key="frame" x="0.0" y="0.0" width="197" height="121"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Yxv-jH-652" secondAttribute="height" multiplier="192:121" id="KyO-l3-Mkw"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="M8J-TZ-1Um">
+                                                            <rect key="frame" x="207" y="0.0" width="197" height="121"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GameName" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2V-St-3ju">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="197" height="60.5"/>
+                                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="et0-jD-Lxw">
+                                                                    <rect key="frame" x="0.0" y="60.5" width="197" height="60.5"/>
+                                                                    <attributedString key="attributedText">
+                                                                        <fragment content="GameRating">
+                                                                            <attributes>
+                                                                                <font key="NSFont" metaFont="system" size="17"/>
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                            </attributes>
+                                                                        </fragment>
+                                                                    </attributedString>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="7tz-B9-pFw" secondAttribute="bottom" id="93L-Pa-CTL"/>
+                                                <constraint firstItem="7tz-B9-pFw" firstAttribute="trailing" secondItem="3cN-On-9CJ" secondAttribute="trailing" constant="-10" id="Yuf-xP-R8G"/>
+                                                <constraint firstItem="7tz-B9-pFw" firstAttribute="leading" secondItem="3cN-On-9CJ" secondAttribute="leading" id="oft-VS-x5B"/>
+                                                <constraint firstItem="7tz-B9-pFw" firstAttribute="top" secondItem="3cN-On-9CJ" secondAttribute="top" id="tB2-8t-qgl"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="gameImage" destination="Yxv-jH-652" id="rne-01-h2l"/>
+                                            <outlet property="gameName" destination="X2V-St-3ju" id="WTM-et-wOn"/>
+                                            <outlet property="gameRating" destination="et0-jD-Lxw" id="O2z-nx-cC3"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -53,13 +83,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="KNJ-TG-5da" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="HUw-xT-YYq"/>
-                            <constraint firstItem="KNJ-TG-5da" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kLj-UY-rLM"/>
-                            <constraint firstItem="KNJ-TG-5da" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="oqY-cy-HLH"/>
-                            <constraint firstAttribute="bottom" secondItem="KNJ-TG-5da" secondAttribute="bottom" id="vdM-2I-4kD"/>
+                            <constraint firstItem="KNJ-TG-5da" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="18u-hk-KBA"/>
+                            <constraint firstAttribute="bottom" secondItem="KNJ-TG-5da" secondAttribute="bottom" id="j4i-r0-40F"/>
+                            <constraint firstAttribute="trailing" secondItem="KNJ-TG-5da" secondAttribute="trailing" id="kb3-mW-AVh"/>
+                            <constraint firstItem="KNJ-TG-5da" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vha-Cv-GVZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="6kr-KK-Cyx"/>
+                    <navigationItem key="navigationItem" title="Games Rating" id="6kr-KK-Cyx"/>
                     <connections>
                         <outlet property="tableView" destination="KNJ-TG-5da" id="FGM-6x-ecq"/>
                         <segue destination="Tw0-pr-PWF" kind="show" identifier="segueIdentifier" id="rE1-Ih-a9E"/>
@@ -88,18 +118,19 @@
         <!--Navigation Controller-->
         <scene sceneID="Lrn-Dd-0Up">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jiS-KD-Yqd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="svT-qD-2yV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="JTK-Wr-b7p">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.97680455450000003" green="0.96710909120545296" blue="0.38440968979490991" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="yJz-zT-wiA"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jiS-KD-Yqd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="78.348214285714278"/>
         </scene>

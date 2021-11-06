@@ -9,11 +9,11 @@ import UIKit
 
 class GameViewController: UIViewController {
 
-    var link : String = ""
+    var image : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(link)
+        
         // Do any additional setup after loading the view.
     }
     

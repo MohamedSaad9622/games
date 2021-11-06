@@ -66,10 +66,10 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellidentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellidentifier", for: indexPath) as! GameTableViewCell
         
-        cell.textLabel?.text = gamesList[indexPath.row].name
-        cell.detailTextLabel?.text = String(gamesList[indexPath.row].rating)
+        cell.gameName.text = gamesList[indexPath.row].name
+        cell.gameRating.text = String(gamesList[indexPath.row].rating)
         
         // to show the image from its url
         let imageUrl = URL(string: gamesList[indexPath.row].background_image)
@@ -78,7 +78,7 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
                     let data = try? Data(contentsOf: url)
                     DispatchQueue.main.async {
                         if let safeData = data{
-                            cell.imageView?.image = UIImage(data: safeData)
+                            cell.gameImage.image = UIImage(data: safeData)
                     }
                 }
             }
