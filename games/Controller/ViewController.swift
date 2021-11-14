@@ -8,6 +8,9 @@
 import UIKit
 
 class ViewController: UIViewController, GamesManagerDelegate  {
+    func didUpdateGames(gameDesc: GameDescription) {
+        
+    }
     
 
     @IBOutlet weak var tableView: UITableView!
@@ -17,6 +20,9 @@ class ViewController: UIViewController, GamesManagerDelegate  {
     var gamesList = [Results]()
     // the link for next 20 games (next list)
     var nextGamesList = ""
+    var gameIndex : Int = 0
+    // to save image data to show in GameViewController without need to reload this data again
+    var imageData : Data?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,27 +31,25 @@ class ViewController: UIViewController, GamesManagerDelegate  {
         
         gamesManager.performRequest(with: url)
         gamesManager.delegate = self
+        gamesManager.viewName = "ViewController"
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        
-//        // for custom tableViewCell
-//        tableView.register(UINib(nibName: "gameViewCell", bundle: nil), forCellReuseIdentifier: "gameCellIdentifier")
         
     }
 
 
     // to recieve the data from GamesManager by the delegate
-    func didUpdateGames(games: GameData, nextGamesList: String) {
+    func didUpdateGames(games: GameData) {
         
         DispatchQueue.main.async {
             // because every link have 20 games and there is link to another 20 games called "next"
             if self.gamesList.count == 0 {
                 self.gamesList = games.results
-                self.nextGamesList = nextGamesList
+                self.nextGamesList = games.next
             }else{
                 self.gamesList += games.results
-                self.nextGamesList = nextGamesList
+                self.nextGamesList = games.next
             }
             self.tableView.reloadData()
         }
@@ -57,7 +61,7 @@ class ViewController: UIViewController, GamesManagerDelegate  {
 
 
 
-// tableView & seque
+// tableView & segue
 extension ViewController: UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,9 +79,9 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
         let imageUrl = URL(string: gamesList[indexPath.row].background_image)
         DispatchQueue.global().async {
             if let url = imageUrl{
-                    let data = try? Data(contentsOf: url)
+                self.imageData = try? Data(contentsOf: url)
                     DispatchQueue.main.async {
-                        if let safeData = data{
+                        if let safeData = self.imageData {
                             cell.gameImage.image = UIImage(data: safeData)
                     }
                 }
@@ -94,12 +98,15 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
 
     // perform seque when choose any cell (open  GameViewController)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        gameIndex = indexPath.row
         self.performSegue(withIdentifier: "segueIdentifier", sender: self)
     }
     // for send data to GameViewController
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any? ) {
         if segue.identifier == "segueIdentifier" {
             let destinationVc = segue.destination as! GameViewController
+            destinationVc.id = gamesList[gameIndex].id
+            destinationVc.imageData = imageData
         }
     }
     

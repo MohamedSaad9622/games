@@ -17,5 +17,11 @@ struct Results : Codable {
     let name : String
     let background_image : String
     let rating : Double
+    let id : Int
+    // for gameDescription
+}
 
+struct GameDescription : Codable {
+    let website : String
+    let description_raw : String
 }
