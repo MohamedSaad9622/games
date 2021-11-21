@@ -20,62 +20,14 @@
                                 <rect key="frame" x="0.0" y="140" width="414" height="756"/>
                                 <color key="separatorColor" red="0.97680455450000003" green="0.95481186894940684" blue="0.20277862550195172" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellidentifier" rowHeight="121" id="Cn6-1A-QZ4" customClass="GameTableViewCell" customModule="games" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="cellidentifier" rowHeight="121" id="Cn6-1A-QZ4" customClass="GameTableViewCell" customModule="games" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="121"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cn6-1A-QZ4" id="3cN-On-9CJ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="121"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7tz-B9-pFw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="404" height="121"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="Yxv-jH-652">
-                                                            <rect key="frame" x="0.0" y="0.0" width="197" height="121"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="Yxv-jH-652" secondAttribute="height" multiplier="192:121" id="KyO-l3-Mkw"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="M8J-TZ-1Um">
-                                                            <rect key="frame" x="207" y="0.0" width="197" height="121"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GameName" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2V-St-3ju">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="197" height="60.5"/>
-                                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="et0-jD-Lxw">
-                                                                    <rect key="frame" x="0.0" y="60.5" width="197" height="60.5"/>
-                                                                    <attributedString key="attributedText">
-                                                                        <fragment content="GameRating">
-                                                                            <attributes>
-                                                                                <font key="NSFont" metaFont="system" size="17"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                    </attributedString>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </stackView>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="7tz-B9-pFw" secondAttribute="bottom" id="93L-Pa-CTL"/>
-                                                <constraint firstItem="7tz-B9-pFw" firstAttribute="trailing" secondItem="3cN-On-9CJ" secondAttribute="trailing" constant="-10" id="Yuf-xP-R8G"/>
-                                                <constraint firstItem="7tz-B9-pFw" firstAttribute="leading" secondItem="3cN-On-9CJ" secondAttribute="leading" id="oft-VS-x5B"/>
-                                                <constraint firstItem="7tz-B9-pFw" firstAttribute="top" secondItem="3cN-On-9CJ" secondAttribute="top" id="tB2-8t-qgl"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <outlet property="gameImage" destination="Yxv-jH-652" id="rne-01-h2l"/>
-                                            <outlet property="gameName" destination="X2V-St-3ju" id="WTM-et-wOn"/>
-                                            <outlet property="gameRating" destination="et0-jD-Lxw" id="O2z-nx-cC3"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -143,7 +95,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="image" width="1500" height="1500"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

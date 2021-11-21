@@ -36,6 +36,8 @@ class ViewController: UIViewController, GamesManagerDelegate {
         gamesManager.delegate = self
         gamesManager.viewName = "ViewController"
         
+        tableView.register(UINib(nibName: "GameTableViewCell", bundle: nil), forCellReuseIdentifier: "gameCell_Identifier")
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.searchBar.delegate = self
@@ -55,7 +57,7 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellidentifier", for: indexPath) as! GameTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell_Identifier", for: indexPath) as! GameTableViewCell
         
         cell.gameName.text = gamesList[indexPath.row].name
         cell.gameRating.text = String(gamesList[indexPath.row].rating)
@@ -122,6 +124,7 @@ extension ViewController{
 
 
 // MARK: - Extensions
+
 extension ViewController : UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchVal = searchBar.text {
@@ -135,8 +138,6 @@ extension ViewController : UISearchBarDelegate {
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = nil
-//        searchBar.placeholder = "search for a game"
         searchBar.showsCancelButton = false
-        
     }
 }
