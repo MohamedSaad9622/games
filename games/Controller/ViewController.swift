@@ -7,27 +7,30 @@
 
 import UIKit
 
-class ViewController: UIViewController, GamesManagerDelegate  {
+class ViewController: UIViewController, GamesManagerDelegate , UISearchBarDelegate {
     func didUpdateGames(gameDesc: GameDescription) {
         
     }
     
 
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     var gamesManager = GamesManager()
     // to recieve games list from GamesManager
     var gamesList = [Results]()
     // the link for next 20 games (next list)
-    var nextGamesList = ""
+    var nextGamesList : String?
     var gameIndex : Int = 0
     // to save image data to show in GameViewController without need to reload this data again
     var imageData : Data?
     
+    var searchTest = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&platforms=18,1,7"
+        let url = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating"
         
         gamesManager.performRequest(with: url)
         gamesManager.delegate = self
@@ -35,6 +38,7 @@ class ViewController: UIViewController, GamesManagerDelegate  {
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.searchBar.delegate = self
         
     }
 
@@ -44,7 +48,8 @@ class ViewController: UIViewController, GamesManagerDelegate  {
         
         DispatchQueue.main.async {
             // because every link have 20 games and there is link to another 20 games called "next"
-            if self.gamesList.count == 0 {
+            if self.gamesList.count == 0 || self.searchTest == true {
+                self.searchTest = false
                 self.gamesList = games.results
                 self.nextGamesList = games.next
             }else{
@@ -55,6 +60,13 @@ class ViewController: UIViewController, GamesManagerDelegate  {
         }
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchVal = searchBar.text {
+            searchTest = true
+            var searchUrl = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating&search=\(searchVal)"
+            self.gamesManager.performRequest(with: searchUrl)
+        }   
+    }
     
 
 }
@@ -90,7 +102,9 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
         
         // to load more games (by start new request api) when scroll to the end of tableView
         if indexPath.row == gamesList.count - 1  {
-                self.gamesManager.performRequest(with: self.nextGamesList)
+            if let nextList = self.nextGamesList{
+                self.gamesManager.performRequest(with: nextList)
+            }
         }
         return cell
     }

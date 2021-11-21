@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KNJ-TG-5da">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="756"/>
                                 <color key="separatorColor" red="0.97680455450000003" green="0.95481186894940684" blue="0.20277862550195172" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellidentifier" rowHeight="121" id="Cn6-1A-QZ4" customClass="GameTableViewCell" customModule="games" customModuleProvider="target">
@@ -79,11 +79,23 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" placeholder="search game" translatesAutoresizingMaskIntoConstraints="NO" id="6WW-Y0-51N">
+                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
+                                <color key="barTintColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="KNJ-TG-5da" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="18u-hk-KBA"/>
+                            <constraint firstAttribute="trailing" secondItem="6WW-Y0-51N" secondAttribute="trailing" id="Ed4-ks-V0m"/>
+                            <constraint firstAttribute="leading" secondItem="6WW-Y0-51N" secondAttribute="leading" id="XwH-nO-Rce"/>
+                            <constraint firstItem="KNJ-TG-5da" firstAttribute="top" secondItem="6WW-Y0-51N" secondAttribute="bottom" constant="1" id="dGx-p9-qjb"/>
+                            <constraint firstItem="6WW-Y0-51N" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="iYf-3z-tOf"/>
                             <constraint firstAttribute="bottom" secondItem="KNJ-TG-5da" secondAttribute="bottom" id="j4i-r0-40F"/>
                             <constraint firstAttribute="trailing" secondItem="KNJ-TG-5da" secondAttribute="trailing" id="kb3-mW-AVh"/>
                             <constraint firstItem="KNJ-TG-5da" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vha-Cv-GVZ"/>
@@ -91,6 +103,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Games Rating" id="6kr-KK-Cyx"/>
                     <connections>
+                        <outlet property="searchBar" destination="6WW-Y0-51N" id="CPp-KC-e9s"/>
                         <outlet property="tableView" destination="KNJ-TG-5da" id="FGM-6x-ecq"/>
                         <segue destination="Tw0-pr-PWF" kind="show" identifier="segueIdentifier" id="rE1-Ih-a9E"/>
                     </connections>
