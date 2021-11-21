@@ -79,10 +79,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" placeholder="search game" translatesAutoresizingMaskIntoConstraints="NO" id="6WW-Y0-51N">
+                            <searchBar contentMode="redraw" placeholder="search for a game" translatesAutoresizingMaskIntoConstraints="NO" id="6WW-Y0-51N">
                                 <rect key="frame" x="0.0" y="88" width="414" height="51"/>
                                 <color key="barTintColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" textContentType="name"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
                                     <string>Title</string>
@@ -105,114 +105,22 @@
                     <connections>
                         <outlet property="searchBar" destination="6WW-Y0-51N" id="CPp-KC-e9s"/>
                         <outlet property="tableView" destination="KNJ-TG-5da" id="FGM-6x-ecq"/>
-                        <segue destination="Tw0-pr-PWF" kind="show" identifier="segueIdentifier" id="rE1-Ih-a9E"/>
+                        <segue destination="SIM-G4-UYL" kind="show" identifier="segueIdentifier" id="8Ez-V9-1AK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="928.98550724637687" y="78.348214285714278"/>
         </scene>
-        <!--Game View Controller-->
-        <scene sceneID="u3z-Zt-6cV">
+        <!--DetailsStoryboardID-->
+        <scene sceneID="UHI-3V-JrF">
             <objects>
-                <viewController id="Tw0-pr-PWF" customClass="GameViewController" customModule="games" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="C7t-Az-gw4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epb-gl-pL8">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="GB9-RX-1II">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="489"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3dn-gZ-YC0">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="448"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYR-lP-4eI">
-                                                <rect key="frame" x="0.0" y="453" width="414" height="0.0"/>
-                                                <color key="backgroundColor" red="0.97680455450000003" green="0.86436356449999996" blue="0.57771407200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edi-03-PmO">
-                                                <rect key="frame" x="0.0" y="458" width="414" height="31"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="network" catalog="system" title="Go to Web"/>
-                                                <connections>
-                                                    <action selector="GoToWebIsPressed:" destination="Tw0-pr-PWF" eventType="touchUpInside" id="Tf2-Vv-5Q5"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="GB9-RX-1II" firstAttribute="leading" secondItem="epb-gl-pL8" secondAttribute="leading" id="6Ra-BB-9sM"/>
-                                    <constraint firstItem="GB9-RX-1II" firstAttribute="width" secondItem="epb-gl-pL8" secondAttribute="width" id="7vK-zM-M1Y"/>
-                                    <constraint firstItem="GB9-RX-1II" firstAttribute="bottom" secondItem="epb-gl-pL8" secondAttribute="bottom" id="9zf-oi-IyB"/>
-                                    <constraint firstItem="GB9-RX-1II" firstAttribute="top" secondItem="epb-gl-pL8" secondAttribute="top" id="Odd-lo-QwJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="GB9-RX-1II" secondAttribute="trailing" id="jle-AL-aDt"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="ff7-1u-cEb"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="UBb-Ab-bis"/>
-                            </scrollView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="sVH-ju-13d"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="epb-gl-pL8" firstAttribute="bottom" secondItem="sVH-ju-13d" secondAttribute="bottom" id="Icg-rG-Xyk"/>
-                            <constraint firstItem="epb-gl-pL8" firstAttribute="top" secondItem="sVH-ju-13d" secondAttribute="top" id="MRV-SD-jEX"/>
-                            <constraint firstItem="epb-gl-pL8" firstAttribute="leading" secondItem="sVH-ju-13d" secondAttribute="leading" id="Peo-tU-qzJ"/>
-                            <constraint firstItem="epb-gl-pL8" firstAttribute="trailing" secondItem="sVH-ju-13d" secondAttribute="trailing" id="SBp-8m-McL"/>
-                            <constraint firstItem="3dn-gZ-YC0" firstAttribute="height" secondItem="C7t-Az-gw4" secondAttribute="height" multiplier="0.5" id="sYJ-iz-52W"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="kI0-bA-ZvN"/>
-                    <connections>
-                        <outlet property="gameDescription" destination="MYR-lP-4eI" id="Mou-6m-dVW"/>
-                        <outlet property="gameImage" destination="3dn-gZ-YC0" id="ZaD-ex-RuG"/>
-                        <segue destination="50F-bv-lBz" kind="show" identifier="webIdentifier" id="JDu-IY-fwg"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZZa-zw-ADG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="DetailsStoryboard" referencedIdentifier="DetailsStoryboardID" id="SIM-G4-UYL" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="W1Z-vQ-Nd5"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v4Z-7u-qU1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1771.0144927536232" y="77.678571428571431"/>
-        </scene>
-        <!--Web View Controller-->
-        <scene sceneID="3wg-gb-3SJ">
-            <objects>
-                <viewController id="50F-bv-lBz" customClass="WebViewController" customModule="games" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="EUz-EG-kgi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XXr-iP-WBX">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="3Wo-45-iRF"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="XXr-iP-WBX" secondAttribute="bottom" id="Qlh-JI-x6h"/>
-                            <constraint firstItem="XXr-iP-WBX" firstAttribute="trailing" secondItem="3Wo-45-iRF" secondAttribute="trailing" id="TM5-uD-AfY"/>
-                            <constraint firstItem="XXr-iP-WBX" firstAttribute="top" secondItem="3Wo-45-iRF" secondAttribute="top" id="eJK-Od-hIx"/>
-                            <constraint firstItem="XXr-iP-WBX" firstAttribute="centerX" secondItem="EUz-EG-kgi" secondAttribute="centerX" id="uXF-Fc-bKg"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="ca6-CO-KXO"/>
-                    <connections>
-                        <outlet property="webView" destination="XXr-iP-WBX" id="esv-80-wcK"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YdC-ET-Xhj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2705.7971014492755" y="77.678571428571431"/>
+            <point key="canvasLocation" x="1715" y="60"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lrn-Dd-0Up">
@@ -236,7 +144,6 @@
     </scenes>
     <resources>
         <image name="image" width="1500" height="1500"/>
-        <image name="network" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, GamesManagerDelegate , UISearchBarDelegate {
+class ViewController: UIViewController, GamesManagerDelegate {
     func didUpdateGames(gameDesc: GameDescription) {
         
     }
@@ -42,38 +42,11 @@ class ViewController: UIViewController, GamesManagerDelegate , UISearchBarDelega
         
     }
 
-
-    // to recieve the data from GamesManager by the delegate
-    func didUpdateGames(games: GameData) {
-        
-        DispatchQueue.main.async {
-            // because every link have 20 games and there is link to another 20 games called "next"
-            if self.gamesList.count == 0 || self.searchTest == true {
-                self.searchTest = false
-                self.gamesList = games.results
-                self.nextGamesList = games.next
-            }else{
-                self.gamesList += games.results
-                self.nextGamesList = games.next
-            }
-            self.tableView.reloadData()
-        }
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let searchVal = searchBar.text {
-            searchTest = true
-            var searchUrl = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating&search=\(searchVal)"
-            self.gamesManager.performRequest(with: searchUrl)
-        }   
-    }
-    
-
 }
 
 
+//MARK: - tableView & segue
 
-// tableView & segue
 extension ViewController: UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -124,4 +97,46 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
         }
     }
     
+}
+
+//MARK: - update ui
+
+extension ViewController{
+    // to recieve the data from GamesManager by the delegate
+    func didUpdateGames(games: GameData) {
+        
+        DispatchQueue.main.async {
+            // because every link have 20 games and there is link to another 20 games called "next"
+            if self.gamesList.count == 0 || self.searchTest == true {
+                self.searchTest = false
+                self.gamesList = games.results
+                self.nextGamesList = games.next
+            }else{
+                self.gamesList += games.results
+                self.nextGamesList = games.next
+            }
+            self.tableView.reloadData()
+        }
+    }
+}
+
+
+// MARK: - Extensions
+extension ViewController : UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchVal = searchBar.text {
+            searchTest = true
+            var searchUrl = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating&search=\(searchVal)"
+            self.gamesManager.performRequest(with: searchUrl)
+        }
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+//        searchBar.placeholder = "search for a game"
+        searchBar.showsCancelButton = false
+        
+    }
 }
