@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class GameViewController: UIViewController , GamesManagerDelegate {
     func didUpdateGames(games: GameData) {
@@ -41,19 +42,24 @@ class GameViewController: UIViewController , GamesManagerDelegate {
                 self.gameImage.image = UIImage(data: self.imageData!)
             }
         }
-        
-        
     }
 
 
     @IBAction func GoToWebIsPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "webIdentifier", sender: self)
+//        performSegue(withIdentifier: "webIdentifier", sender: self)
+        if let link = webUrl {
+            if let url = URL(string: link) {
+                let vc = SFSafariViewController(url: url)
+                present(vc, animated: false)
+            }
+        }
+        
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "webIdentifier"{
-            let destinationVc = segue.destination as! WebViewController
-            destinationVc.url = webUrl
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "webIdentifier"{
+//            let destinationVc = segue.destination as! WebViewController
+//            destinationVc.url = webUrl
+//        }
+//    }
 }
