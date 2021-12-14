@@ -27,10 +27,10 @@ class ViewController: UIViewController, GamesManagerDelegate {
     
     var searchTest = false
     
+    let url = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let url = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating"
         
         gamesManager.performRequest(with: url)
         gamesManager.delegate = self
@@ -88,7 +88,10 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
     // perform seque when choose any cell (open  GameViewController)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         gameIndex = indexPath.row
-        self.performSegue(withIdentifier: "segueIdentifier", sender: self)
+//        self.performSegue(withIdentifier: "segueIdentifier", sender: self)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "DetailsStoryboard", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsStoryboardID") as! GameViewController
+        navigationController?.pushViewController(newViewController, animated: false)
     }
     // for send data to GameViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any? ) {
@@ -123,7 +126,7 @@ extension ViewController{
 }
 
 
-// MARK: - Extensions
+// MARK: - UISearchBarDelegate
 
 extension ViewController : UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -137,6 +140,9 @@ extension ViewController : UISearchBarDelegate {
         searchBar.showsCancelButton = true
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchTest = true
+        gamesManager.performRequest(with: url)
+        searchBar.resignFirstResponder()
         searchBar.text = nil
         searchBar.showsCancelButton = false
     }

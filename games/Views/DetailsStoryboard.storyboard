@@ -74,41 +74,6 @@
             </objects>
             <point key="canvasLocation" x="1771.0144927536232" y="77.678571428571431"/>
         </scene>
-        <!--Web View Controller-->
-        <scene sceneID="JD2-xO-BvG">
-            <objects>
-                <viewController id="akT-1y-H8L" customClass="WebViewController" customModule="games" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="EZk-z1-Mdr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTu-pb-I8O">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="7WM-Fh-zJ6"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="hTu-pb-I8O" firstAttribute="centerX" secondItem="EZk-z1-Mdr" secondAttribute="centerX" id="IHP-yL-3BK"/>
-                            <constraint firstAttribute="bottom" secondItem="hTu-pb-I8O" secondAttribute="bottom" id="cbO-jh-WI4"/>
-                            <constraint firstItem="hTu-pb-I8O" firstAttribute="top" secondItem="7WM-Fh-zJ6" secondAttribute="top" id="odR-Jh-VFl"/>
-                            <constraint firstItem="hTu-pb-I8O" firstAttribute="trailing" secondItem="7WM-Fh-zJ6" secondAttribute="trailing" id="tOy-hj-AKp"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="f0Y-6i-Jfq"/>
-                    <connections>
-                        <outlet property="webView" destination="hTu-pb-I8O" id="64r-1i-PZP"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W67-DX-MpG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2705.7971014492755" y="77.678571428571431"/>
-        </scene>
     </scenes>
     <resources>
         <image name="network" catalog="system" width="128" height="121"/>

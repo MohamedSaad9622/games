@@ -57,22 +57,11 @@
                     <connections>
                         <outlet property="searchBar" destination="6WW-Y0-51N" id="CPp-KC-e9s"/>
                         <outlet property="tableView" destination="KNJ-TG-5da" id="FGM-6x-ecq"/>
-                        <segue destination="SIM-G4-UYL" kind="show" identifier="segueIdentifier" id="8Ez-V9-1AK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="928.98550724637687" y="78.348214285714278"/>
-        </scene>
-        <!--DetailsStoryboardID-->
-        <scene sceneID="UHI-3V-JrF">
-            <objects>
-                <viewControllerPlaceholder storyboardName="DetailsStoryboard" referencedIdentifier="DetailsStoryboardID" id="SIM-G4-UYL" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="W1Z-vQ-Nd5"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v4Z-7u-qU1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1715" y="60"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lrn-Dd-0Up">
