@@ -21,16 +21,14 @@ class GameViewController: UIViewController , GamesManagerDelegate {
     var imageData : Data?
     var webUrl : String?
     
-    let gameManager = GamesManager()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let gameId = id {
             var url = "https://api.rawg.io/api/games/\(gameId)?key=81f92c650c3b4ab8b3cb270a82276aae"
-            gameManager.performRequest(with: url)
+            GamesManager.shared.performRequest(with: url)
         }
         
-        gameManager.delegate = self
+        GamesManager.shared.delegate = self
     }
     
 

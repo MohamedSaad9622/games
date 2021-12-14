@@ -12,11 +12,10 @@ class ViewController: UIViewController, GamesManagerDelegate {
         
     }
     
-
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var gamesManager = GamesManager()
+
     // to recieve games list from GamesManager
     var gamesList = [Results]()
     // the link for next 20 games (next list)
@@ -28,13 +27,20 @@ class ViewController: UIViewController, GamesManagerDelegate {
     var searchTest = false
     
     let url = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating"
+    var searchUrl = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating&search="
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        gamesManager.performRequest(with: url)
-        gamesManager.delegate = self
-        gamesManager.viewName = "ViewController"
+        // swipe to refresh
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        tableView.backgroundView = refreshControl
+
+        
+        GamesManager.shared.performRequest(with: url)
+        GamesManager.shared.delegate = self
+        GamesManager.shared.viewName = "ViewController"
         
         tableView.register(UINib(nibName: "GameTableViewCell", bundle: nil), forCellReuseIdentifier: "gameCell_Identifier")
         
@@ -44,6 +50,18 @@ class ViewController: UIViewController, GamesManagerDelegate {
         
     }
 
+    @objc func refresh(_ refreshControl: UIRefreshControl) {
+        if searchTest {
+            GamesManager.shared.performRequest(with: searchUrl)
+        }
+        else{
+            GamesManager.shared.performRequest(with: url)
+        }
+        
+        refreshControl.endRefreshing()
+        
+    }
+    
 }
 
 
@@ -58,10 +76,10 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell_Identifier", for: indexPath) as! GameTableViewCell
-        
+
         cell.gameName.text = gamesList[indexPath.row].name
         cell.gameRating.text = String(gamesList[indexPath.row].rating)
-        
+
         // to show the image from its url
         let imageUrl = URL(string: gamesList[indexPath.row].background_image)
         DispatchQueue.global().async {
@@ -78,7 +96,7 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
         // to load more games (by start new request api) when scroll to the end of tableView
         if indexPath.row == gamesList.count - 1  {
             if let nextList = self.nextGamesList{
-                self.gamesManager.performRequest(with: nextList)
+                GamesManager.shared.performRequest(with: nextList)
             }
         }
         return cell
@@ -88,7 +106,6 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
     // perform seque when choose any cell (open  GameViewController)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         gameIndex = indexPath.row
-//        self.performSegue(withIdentifier: "segueIdentifier", sender: self)
         let storyBoard: UIStoryboard = UIStoryboard(name: "DetailsStoryboard", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsStoryboardID") as! GameViewController
         navigationController?.pushViewController(newViewController, animated: false)
@@ -132,8 +149,8 @@ extension ViewController : UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchVal = searchBar.text {
             searchTest = true
-            var searchUrl = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating&search=\(searchVal)"
-            self.gamesManager.performRequest(with: searchUrl)
+            searchUrl += searchVal
+            GamesManager.shared.performRequest(with: searchUrl)
         }
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -141,7 +158,7 @@ extension ViewController : UISearchBarDelegate {
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchTest = true
-        gamesManager.performRequest(with: url)
+        GamesManager.shared.performRequest(with: url)
         searchBar.resignFirstResponder()
         searchBar.text = nil
         searchBar.showsCancelButton = false

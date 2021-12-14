@@ -15,7 +15,7 @@ protocol GamesManagerDelegate {
 
 class GamesManager {
     
-
+    static let shared = GamesManager()
     var delegate : GamesManagerDelegate?
     var viewName : String?
     
