@@ -17,12 +17,12 @@ class ViewController: UIViewController, GamesManagerDelegate {
     
 
     // to recieve games list from GamesManager
-    var gamesList = [Results]()
+    static var gamesList = [Results]()
     // the link for next 20 games (next list)
     var nextGamesList : String?
-    var gameIndex : Int = 0
+    static var gameIndex : Int?
     // to save image data to show in GameViewController without need to reload this data again
-    var imageData : Data?
+    static var imageData : Data?
     
     var searchTest = false
     
@@ -39,8 +39,6 @@ class ViewController: UIViewController, GamesManagerDelegate {
 
         
         GamesManager.shared.performRequest(with: url)
-        GamesManager.shared.delegate = self
-        GamesManager.shared.viewName = "ViewController"
         
         tableView.register(UINib(nibName: "GameTableViewCell", bundle: nil), forCellReuseIdentifier: "gameCell_Identifier")
         
@@ -48,6 +46,11 @@ class ViewController: UIViewController, GamesManagerDelegate {
         self.tableView.delegate = self
         self.searchBar.delegate = self
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        GamesManager.shared.delegate = self
     }
 
     @objc func refresh(_ refreshControl: UIRefreshControl) {
@@ -70,23 +73,23 @@ class ViewController: UIViewController, GamesManagerDelegate {
 extension ViewController: UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return gamesList.count
+        return ViewController.gamesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell_Identifier", for: indexPath) as! GameTableViewCell
 
-        cell.gameName.text = gamesList[indexPath.row].name
-        cell.gameRating.text = String(gamesList[indexPath.row].rating)
+        cell.gameName.text = ViewController.gamesList[indexPath.row].name
+        cell.gameRating.text = String(ViewController.gamesList[indexPath.row].rating)
 
         // to show the image from its url
-        let imageUrl = URL(string: gamesList[indexPath.row].background_image)
+        let imageUrl = URL(string: ViewController.gamesList[indexPath.row].background_image)
         DispatchQueue.global().async {
             if let url = imageUrl{
-                self.imageData = try? Data(contentsOf: url)
+                ViewController.imageData = try? Data(contentsOf: url)
                     DispatchQueue.main.async {
-                        if let safeData = self.imageData {
+                        if let safeData = ViewController.imageData {
                             cell.gameImage.image = UIImage(data: safeData)
                     }
                 }
@@ -94,30 +97,40 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
         }
         
         // to load more games (by start new request api) when scroll to the end of tableView
-        if indexPath.row == gamesList.count - 1  {
+//        if indexPath.row == ViewController.gamesList.count - 1  {
+//            if let nextList = self.nextGamesList{
+//                GamesManager.shared.performRequest(with: nextList)
+//            }
+//        }
+        return cell
+    }
+    
+//     add pagination to load more games
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == ViewController.gamesList.count - 1 {
             if let nextList = self.nextGamesList{
                 GamesManager.shared.performRequest(with: nextList)
             }
         }
-        return cell
     }
-    
 
     // perform seque when choose any cell (open  GameViewController)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        gameIndex = indexPath.row
+        ViewController.gameIndex = indexPath.row
+        GamesManager.isGameViewController = true
+        // to open GameViewController programmatically
         let storyBoard: UIStoryboard = UIStoryboard(name: "DetailsStoryboard", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsStoryboardID") as! GameViewController
+        var newViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsStoryboardID") as! GameViewController
         navigationController?.pushViewController(newViewController, animated: false)
     }
-    // for send data to GameViewController
-    override func prepare(for segue: UIStoryboardSegue, sender: Any? ) {
-        if segue.identifier == "segueIdentifier" {
-            let destinationVc = segue.destination as! GameViewController
-            destinationVc.id = gamesList[gameIndex].id
-            destinationVc.imageData = imageData
-        }
-    }
+//    // for send data to GameViewController
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any? ) {
+//        if segue.identifier == "segueIdentifier" {
+//            let destinationVc = segue.destination as! GameViewController
+//            destinationVc.id = gamesList[gameIndex].id
+//            destinationVc.imageData = imageData
+//        }
+//    }
     
 }
 
@@ -129,12 +142,12 @@ extension ViewController{
         
         DispatchQueue.main.async {
             // because every link have 20 games and there is link to another 20 games called "next"
-            if self.gamesList.count == 0 || self.searchTest == true {
+            if ViewController.gamesList.count == 0 || self.searchTest == true {
                 self.searchTest = false
-                self.gamesList = games.results
+                ViewController.gamesList = games.results
                 self.nextGamesList = games.next
             }else{
-                self.gamesList += games.results
+                ViewController.gamesList += games.results
                 self.nextGamesList = games.next
             }
             self.tableView.reloadData()

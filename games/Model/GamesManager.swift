@@ -17,11 +17,10 @@ class GamesManager {
     
     static let shared = GamesManager()
     var delegate : GamesManagerDelegate?
-    var viewName : String?
+    static var isGameViewController = false
     
     // to fetch data from api
     func performRequest(with url : String) {
-        
         if let urlString = URL(string: url){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: urlString) { data, response, error in
@@ -30,13 +29,14 @@ class GamesManager {
                     return
                 }
                 if let safeData = data {
-                    if self.viewName == "ViewController" {
-                        if let games = self.jsonDecode(gamesData: safeData){
-                            self.delegate?.didUpdateGames(games: games)
-                        }
-                    }else{
+                    if GamesManager.isGameViewController {
+                        GamesManager.isGameViewController = false
                         if let gameDesc = self.jsonDecode(gamesDescription: safeData){
                             self.delegate?.didUpdateGames(gameDesc: gameDesc)
+                        }
+                    }else{
+                        if let games = self.jsonDecode(gamesData: safeData){
+                            self.delegate?.didUpdateGames(games: games)
                         }
                     }
                     
@@ -52,6 +52,7 @@ class GamesManager {
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode( GameData.self , from: gamesData)
+            print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
             return decodedData
         }catch{
             return nil
