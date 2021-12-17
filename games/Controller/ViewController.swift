@@ -20,10 +20,11 @@ class ViewController: UIViewController, GamesManagerDelegate {
     static var gamesList = [Results]()
     // the link for next 20 games (next list)
     var nextGamesList : String?
+    var searchLink : String?
     static var gameIndex : Int?
     // to save image data to show in GameViewController without need to reload this data again
     static var imageData : Data?
-    
+    var showMoreGames = false
     var searchTest = false
     
     let url = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating"
@@ -55,14 +56,12 @@ class ViewController: UIViewController, GamesManagerDelegate {
 
     @objc func refresh(_ refreshControl: UIRefreshControl) {
         if searchTest {
-            GamesManager.shared.performRequest(with: searchUrl)
+            GamesManager.shared.performRequest(with: searchLink!)
         }
         else{
             GamesManager.shared.performRequest(with: url)
         }
-        
         refreshControl.endRefreshing()
-        
     }
     
 }
@@ -108,7 +107,8 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
 //     add pagination to load more games
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == ViewController.gamesList.count - 1 {
-            if let nextList = self.nextGamesList{
+            if let nextList = self.nextGamesList {
+                showMoreGames = true
                 GamesManager.shared.performRequest(with: nextList)
             }
         }
@@ -119,7 +119,7 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
         ViewController.gameIndex = indexPath.row
         GamesManager.isGameViewController = true
         // to open GameViewController programmatically
-        let storyBoard: UIStoryboard = UIStoryboard(name: "DetailsStoryboard", bundle: nil)
+        let storyBoard = UIStoryboard(name: "DetailsStoryboard", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsStoryboardID") as! GameViewController
         navigationController?.pushViewController(newViewController, animated: false)
     }
@@ -142,12 +142,14 @@ extension ViewController{
         
         DispatchQueue.main.async {
             // because every link have 20 games and there is link to another 20 games called "next"
-            if ViewController.gamesList.count == 0 || self.searchTest == true {
+//            if ViewController.gamesList.count == 0 || self.searchTest == true {
 //                self.searchTest = false
-                ViewController.gamesList = games.results
-                self.nextGamesList = games.next
-            }else{
+            if self.showMoreGames{
+                self.showMoreGames = false
                 ViewController.gamesList += games.results
+                self.nextGamesList = games.next
+            }else {
+                ViewController.gamesList = games.results
                 self.nextGamesList = games.next
             }
             self.tableView.reloadData()
@@ -161,9 +163,10 @@ extension ViewController{
 extension ViewController : UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchVal = searchBar.text {
+            searchLink = searchUrl + searchVal
             searchTest = true
-            searchUrl += searchVal
-            GamesManager.shared.performRequest(with: searchUrl)
+            GamesManager.shared.performRequest(with: searchLink!)
+            searchBar.resignFirstResponder()
         }
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -172,10 +175,10 @@ extension ViewController : UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         // scroll to the top
         tableView.setContentOffset(.zero, animated: true)
-        searchTest = true
         GamesManager.shared.performRequest(with: url)
         searchBar.resignFirstResponder()
         searchBar.text = nil
         searchBar.showsCancelButton = false
+        searchTest = false
     }
 }
