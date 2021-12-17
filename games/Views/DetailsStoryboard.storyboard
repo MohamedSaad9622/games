@@ -68,6 +68,7 @@
                     <connections>
                         <outlet property="gameDescription" destination="Z7b-Nd-v7P" id="xfc-0V-EIV"/>
                         <outlet property="gameImage" destination="bVa-Do-ASk" id="bz9-Jz-vn7"/>
+                        <outlet property="goToWebButton" destination="47Z-9D-ktd" id="guU-3Y-5fF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WvC-A0-ISu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

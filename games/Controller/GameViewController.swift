@@ -13,7 +13,7 @@ class GameViewController: UIViewController , GamesManagerDelegate {
         
     }
     
-    
+    @IBOutlet weak var goToWebButton: UIButton!
     @IBOutlet weak var gameDescription: UILabel!
     @IBOutlet weak var gameImage: UIImageView!
     
@@ -23,12 +23,11 @@ class GameViewController: UIViewController , GamesManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        goToWebButton.isHidden = true
         id = ViewController.gamesList[ViewController.gameIndex!].id
         imageData = ViewController.imageData
         if let gameId = id {
             var url = "https://api.rawg.io/api/games/\(gameId)?key=81f92c650c3b4ab8b3cb270a82276aae"
-            print(url)
             GamesManager.shared.performRequest(with: url)
         }
         
@@ -40,13 +39,16 @@ class GameViewController: UIViewController , GamesManagerDelegate {
         DispatchQueue.main.async {
             self.gameDescription.text = gameDesc.description_raw
             self.webUrl = gameDesc.website
+            if self.webUrl != ""{
+                self.goToWebButton.isHidden = false
+            }
             if self.imageData != nil {
                 self.gameImage.image = UIImage(data: self.imageData!)
             }
         }
     }
 
-
+    
     @IBAction func GoToWebIsPressed(_ sender: UIButton) {
 //        performSegue(withIdentifier: "webIdentifier", sender: self)
         if let link = webUrl {

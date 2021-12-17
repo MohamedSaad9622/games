@@ -120,7 +120,7 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
         GamesManager.isGameViewController = true
         // to open GameViewController programmatically
         let storyBoard: UIStoryboard = UIStoryboard(name: "DetailsStoryboard", bundle: nil)
-        var newViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsStoryboardID") as! GameViewController
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsStoryboardID") as! GameViewController
         navigationController?.pushViewController(newViewController, animated: false)
     }
 //    // for send data to GameViewController
@@ -143,7 +143,7 @@ extension ViewController{
         DispatchQueue.main.async {
             // because every link have 20 games and there is link to another 20 games called "next"
             if ViewController.gamesList.count == 0 || self.searchTest == true {
-                self.searchTest = false
+//                self.searchTest = false
                 ViewController.gamesList = games.results
                 self.nextGamesList = games.next
             }else{
@@ -170,6 +170,8 @@ extension ViewController : UISearchBarDelegate {
         searchBar.showsCancelButton = true
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        // scroll to the top
+        tableView.setContentOffset(.zero, animated: true)
         searchTest = true
         GamesManager.shared.performRequest(with: url)
         searchBar.resignFirstResponder()

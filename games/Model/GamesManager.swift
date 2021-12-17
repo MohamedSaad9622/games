@@ -52,7 +52,6 @@ class GamesManager {
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode( GameData.self , from: gamesData)
-            print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
             return decodedData
         }catch{
             return nil
