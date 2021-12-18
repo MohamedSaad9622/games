@@ -26,6 +26,7 @@ class ViewController: UIViewController, GamesManagerDelegate {
     static var imageData : Data?
     var showMoreGames = false
     var searchTest = false
+    static var imageStr : String?
     
     let url = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating"
     var searchUrl = "https://api.rawg.io/api/games?key=81f92c650c3b4ab8b3cb270a82276aae&dates=2021-01-01,2021-09-30&ordering=-rating&search="
@@ -95,7 +96,7 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
             }
         }
         
-        // to load more games (by start new request api) when scroll to the end of tableView
+//        to load more games (by start new request api) when scroll to the end of tableView
 //        if indexPath.row == ViewController.gamesList.count - 1  {
 //            if let nextList = self.nextGamesList{
 //                GamesManager.shared.performRequest(with: nextList)
@@ -118,6 +119,7 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ViewController.gameIndex = indexPath.row
         GamesManager.isGameViewController = true
+        ViewController.imageStr = ViewController.gamesList[indexPath.row].background_image
         // to open GameViewController programmatically
         let storyBoard = UIStoryboard(name: "DetailsStoryboard", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsStoryboardID") as! GameViewController
