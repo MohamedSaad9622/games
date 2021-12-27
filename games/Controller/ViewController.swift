@@ -8,9 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController, GamesManagerDelegate {
-    func didUpdateGames(gameDesc: GameDescription) {
-        
-    }
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -106,7 +103,6 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource {
     // perform seque when choose any cell (open  GameViewController)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         shared.gameIndex = indexPath.row
-        GamesManager.isGameViewController = true
         shared.imageStr = shared.gamesList[indexPath.row].background_image
         // to open GameViewController programmatically
         let storyBoard = UIStoryboard(name: shared.DetailsStoryboard, bundle: nil)

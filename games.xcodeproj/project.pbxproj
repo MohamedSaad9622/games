@@ -22,6 +22,7 @@
 		049DF79F274AAF2E0073F0C1 /* DetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049DF79E274AAF2E0073F0C1 /* DetailsStoryboard.storyboard */; };
 		049DF7AB274ACB170073F0C1 /* GameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049DF7A9274ACB170073F0C1 /* GameTableViewCell.xib */; };
 		04B0BAC22779F041006C4D8C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B0BAC12779F041006C4D8C /* Constants.swift */; };
+		04B0BAC4277A02E6006C4D8C /* GameDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B0BAC3277A02E6006C4D8C /* GameDescription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		049DF79E274AAF2E0073F0C1 /* DetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailsStoryboard.storyboard; sourceTree = "<group>"; };
 		049DF7A9274ACB170073F0C1 /* GameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameTableViewCell.xib; sourceTree = "<group>"; };
 		04B0BAC12779F041006C4D8C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		04B0BAC3277A02E6006C4D8C /* GameDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDescription.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				044F192327358D81002FA58F /* GamesManager.swift */,
+				04B0BAC3277A02E6006C4D8C /* GameDescription.swift */,
 				04B0BAC12779F041006C4D8C /* Constants.swift */,
 				044F191C273412A4002FA58F /* GameData.swift */,
 				044F191E27341CDD002FA58F /* GamesModel.swift */,
@@ -199,6 +202,7 @@
 				04B0BAC22779F041006C4D8C /* Constants.swift in Sources */,
 				044F190327331645002FA58F /* ViewController.swift in Sources */,
 				044F18FF27331645002FA58F /* AppDelegate.swift in Sources */,
+				04B0BAC4277A02E6006C4D8C /* GameDescription.swift in Sources */,
 				044F190127331645002FA58F /* SceneDelegate.swift in Sources */,
 				044F19282736EB2A002FA58F /* GameTableViewCell.swift in Sources */,
 			);

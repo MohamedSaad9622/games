@@ -8,10 +8,7 @@
 import UIKit
 import SafariServices
 
-class GameViewController: UIViewController , GamesManagerDelegate {
-    func didUpdateGames(games: GameData) {
-        
-    }
+class GameViewController: UIViewController , GameDescriptionDelegate {
     
     @IBOutlet weak var goToWebButton: UIButton!
     @IBOutlet weak var gameDescription: UILabel!
@@ -28,10 +25,10 @@ class GameViewController: UIViewController , GamesManagerDelegate {
         
         if let gameId = id {
             var url = "https://api.rawg.io/api/games/\(gameId)?key=81f92c650c3b4ab8b3cb270a82276aae"
-            GamesManager.shared.performRequest(with: url)
+            GameDescrption.shared.performRequest(with: url)
         }
         
-        GamesManager.shared.delegate = self
+        GameDescrption.shared.delegate = self
     }
     
 
