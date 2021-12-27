@@ -19,11 +19,12 @@ class GameViewController: UIViewController , GamesManagerDelegate {
     
     var id : Int?
     var webUrl : String?
+    let shared = Constants.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         goToWebButton.isHidden = true
-        id = ViewController.gamesList[ViewController.gameIndex!].id
+        id = shared.gamesList[shared.gameIndex!].id
         
         if let gameId = id {
             var url = "https://api.rawg.io/api/games/\(gameId)?key=81f92c650c3b4ab8b3cb270a82276aae"
@@ -41,13 +42,13 @@ class GameViewController: UIViewController , GamesManagerDelegate {
             if self.webUrl != ""{
                 self.goToWebButton.isHidden = false
             }
-            if let imageStr = ViewController.imageStr {
+            if let imageStr = self.shared.imageStr {
                 let imageData = URL(string: imageStr)
                 DispatchQueue.global().async {
                     if let url = imageData{
-                        ViewController.imageData = try? Data(contentsOf: url)
+                        self.shared.imageData = try? Data(contentsOf: url)
                             DispatchQueue.main.async {
-                                if let safeData = ViewController.imageData {
+                                if let safeData = self.shared.imageData {
                                     self.gameImage.image = UIImage(data: safeData)
                             }
                         }
